@@ -39,6 +39,10 @@ vim.pack.add({
   'https://github.com/lewis6991/gitsigns.nvim',
   'https://github.com/folke/which-key.nvim',
   'https://github.com/neovim/nvim-lspconfig',
+  {src = 'https://github.com/nvim-neo-tree/neo-tree.nvim', version = 'v3.x'},
+  'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/MunifTanjim/nui.nvim',
+  'https://github.com/nvim-tree/nvim-web-devicons',
   {src = 'https://github.com/nvim-mini/mini.nvim', version = 'main'},
   {src = 'https://github.com/VonHeikemen/ts-enable.nvim', version = 'v2.x'},
 })
@@ -71,15 +75,39 @@ vim.keymap.set('n', '<leader>bc', '<cmd>lua pcall(MiniBufremove.delete)<cr>', {d
 local mini_files = require('mini.files')
 mini_files.setup({})
 
--- Toggle file explorer
--- See :help MiniFiles-navigation
-vim.keymap.set('n', '<leader>e', function()
+-- Keep Mini Files available as a lightweight directory editor.
+vim.keymap.set('n', '<leader>fm', function()
   if mini_files.close() then
     return
   end
 
   mini_files.open()
-end, {desc = 'File explorer'})
+end, {desc = 'Open Mini Files'})
+
+-- See :help neo-tree
+require('neo-tree').setup({
+  close_if_last_window = true,
+  filesystem = {
+    follow_current_file = {
+      enabled = true,
+      leave_dirs_open = true,
+    },
+    filtered_items = {
+      hide_dotfiles = false,
+      hide_gitignored = false,
+    },
+  },
+  window = {
+    position = 'left',
+    width = 32,
+  },
+})
+
+-- Toggle the VS Code-style file explorer sidebar.
+-- See :help MiniFiles-navigation
+vim.keymap.set('n', '<leader>e', function()
+  vim.cmd('Neotree filesystem reveal left toggle')
+end, {desc = 'Toggle file explorer sidebar'})
 
 -- See :help MiniPick.config
 require('mini.pick').setup({})
