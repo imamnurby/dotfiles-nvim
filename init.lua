@@ -45,6 +45,7 @@ vim.pack.add({
   'https://github.com/nvim-tree/nvim-web-devicons',
   {src = 'https://github.com/nvim-mini/mini.nvim', version = 'main'},
   {src = 'https://github.com/VonHeikemen/ts-enable.nvim', version = 'v2.x'},
+  'https://github.com/MeanderingProgrammer/render-markdown.nvim',
 })
 
 -- ========================================================================== --
@@ -138,6 +139,10 @@ require('mini.completion').setup({
     auto_setup = false,
   },
 })
+
+-- Render Markdown inside Neovim.
+-- See: https://github.com/MeanderingProgrammer/render-markdown.nvim
+require('render-markdown').setup({})
 
 -- See :help which-key.nvim-which-key-setup
 require('which-key').setup({

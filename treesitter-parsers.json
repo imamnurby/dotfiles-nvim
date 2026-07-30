@@ -163,6 +163,32 @@
         "copy_from": "query_fallback"
       }
     },
+    "markdown": {
+      "install_info": {
+        "location": "tree-sitter-markdown",
+        "revision": "f969cd3ae3f9fbd4e43205431d0ae286014c05b5",
+        "url": "https://github.com/tree-sitter-grammars/tree-sitter-markdown"
+      },
+      "language_filetypes": [
+        "pandoc"
+      ],
+      "queries_info": {
+        "copy_from": "query_fallback"
+      },
+      "requires": [
+        "markdown_inline"
+      ]
+    },
+    "markdown_inline": {
+      "install_info": {
+        "location": "tree-sitter-markdown-inline",
+        "revision": "f969cd3ae3f9fbd4e43205431d0ae286014c05b5",
+        "url": "https://github.com/tree-sitter-grammars/tree-sitter-markdown"
+      },
+      "queries_info": {
+        "copy_from": "query_fallback"
+      }
+    },
     "php": {
       "install_info": {
         "location": "php",
