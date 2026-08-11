@@ -34,6 +34,15 @@ vim.keymap.set({'n', 'x'}, 'gp', '"+p', {desc = 'Paste clipboard content'})
 -- But as soon as you need to add more information, like the git branch or 
 -- commit, use the "plugin spec" form. See :help vim.pack
 
+-- Treesitter setup
+-- See: https://github.com/VonHeikemen/ts-enable.nvim#usage
+vim.g.ts_enable = {
+  auto_init = true,
+  auto_install = true,
+  highlights = true,
+  parser_info = vim.fn.stdpath('config') .. '/treesitter-parsers.json',
+}
+
 vim.pack.add({
   'https://github.com/folke/tokyonight.nvim',
   'https://github.com/lewis6991/gitsigns.nvim',
@@ -175,14 +184,6 @@ vim.keymap.set('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<cr>', {desc = 'Pre
 vim.keymap.set('n', '<leader>hb', '<cmd>Gitsigns blame_line<cr>', {desc = 'Blame current line'})
 vim.keymap.set('n', '<leader>hr', '<cmd>Gitsigns reset_hunk<cr>', {desc = 'Reset git hunk'})
 vim.keymap.set('n', '<leader>hs', '<cmd>Gitsigns stage_hunk<cr>', {desc = 'Stage git hunk'})
-
--- Treesitter setup
--- See: https://github.com/VonHeikemen/ts-enable.nvim#usage
-vim.g.ts_enable = {
-  auto_init = true,
-  auto_install = true,
-  highlights = true
-}
 
 -- LSP setup
 vim.api.nvim_create_autocmd('LspAttach', {
