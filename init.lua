@@ -43,6 +43,7 @@ vim.pack.add({
   'https://github.com/nvim-lua/plenary.nvim',
   'https://github.com/MunifTanjim/nui.nvim',
   'https://github.com/nvim-tree/nvim-web-devicons',
+  {src = 'https://github.com/s1n7ax/nvim-window-picker', version = 'v2.4.0'},
   {src = 'https://github.com/nvim-mini/mini.nvim', version = 'main'},
   {src = 'https://github.com/VonHeikemen/ts-enable.nvim', version = 'v2.x'},
   'https://github.com/MeanderingProgrammer/render-markdown.nvim',
@@ -65,6 +66,9 @@ require('mini.surround').setup({})
 require('mini.notify').setup({
   lsp_progress = {enable = false},
 })
+
+-- See: https://github.com/s1n7ax/nvim-window-picker#configuration
+require('window-picker').setup({})
 
 -- See :help MiniBufremove.config
 require('mini.bufremove').setup({})
