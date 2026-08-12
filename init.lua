@@ -64,6 +64,7 @@ vim.pack.add({
 -- ========================================================================== --
 
 vim.cmd.colorscheme('tokyonight')
+vim.api.nvim_set_hl(0, 'CursorLine', {bg = '#292e42'})
 
 -- See :help MiniIcons.config
 -- Change style to 'glyph' if you have a font with fancy icons
