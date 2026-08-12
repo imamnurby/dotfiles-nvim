@@ -7,6 +7,7 @@
 -- https://vonheikemen.github.io/devlog/tools/build-your-first-lua-config-for-neovim/
 
 vim.o.number = true
+vim.o.cursorline = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.hlsearch = false
