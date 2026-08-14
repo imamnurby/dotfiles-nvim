@@ -57,6 +57,7 @@ vim.pack.add({
   {src = 'https://github.com/nvim-mini/mini.nvim', version = 'main'},
   {src = 'https://github.com/VonHeikemen/ts-enable.nvim', version = 'v2.x'},
   'https://github.com/MeanderingProgrammer/render-markdown.nvim',
+  'https://github.com/folke/flash.nvim',
 })
 
 -- ========================================================================== --
@@ -181,6 +182,9 @@ require('which-key').add({
 
 -- See :help gitsigns.nvim
 require('gitsigns').setup({})
+
+-- See :help flash.nvim
+require('flash').setup({})
 
 vim.keymap.set('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<cr>', {desc = 'Preview git hunk'})
 vim.keymap.set('n', '<leader>hb', '<cmd>Gitsigns blame_line<cr>', {desc = 'Blame current line'})
