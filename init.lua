@@ -186,6 +186,10 @@ require('gitsigns').setup({})
 -- See :help flash.nvim
 require('flash').setup({})
 
+-- NOTE: flash.nvim does not map these keys by default; see flash README.
+vim.keymap.set({'n', 'x', 'o'}, 's', function() require('flash').jump() end, {desc = 'Flash search'})
+vim.keymap.set({'n', 'x', 'o'}, 'S', function() require('flash').treesitter() end, {desc = 'Flash treesitter'})
+
 vim.keymap.set('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<cr>', {desc = 'Preview git hunk'})
 vim.keymap.set('n', '<leader>hb', '<cmd>Gitsigns blame_line<cr>', {desc = 'Blame current line'})
 vim.keymap.set('n', '<leader>hr', '<cmd>Gitsigns reset_hunk<cr>', {desc = 'Reset git hunk'})
