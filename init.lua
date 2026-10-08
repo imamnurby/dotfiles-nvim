@@ -163,6 +163,7 @@ require('render-markdown').setup({})
 -- See :help which-key.nvim-which-key-setup
 require('which-key').setup({
   preset = 'helix',
+  delay = 0,
   icons = {
     mappings = false,
     keys = {
@@ -179,6 +180,70 @@ require('which-key').add({
   {'<leader>b', group = 'Buffer'},
   {'<leader>h', group = 'Git Hunk'},
 })
+
+-- Navigation aliases also show the native keys as a reminder.
+do
+  local function counted_motion(prompt, motion)
+    return function()
+      vim.ui.input({prompt = prompt}, function(value)
+        if value == nil then
+          return
+        end
+        local count = tonumber(value)
+        if not value:match('^%d+$') or not count or count < 1 or count > 2147483647 then
+          vim.notify('Enter a positive whole number.', vim.log.levels.WARN)
+          return
+        end
+        vim.cmd.normal({args = {tostring(count) .. motion}, bang = true})
+      end)
+    end
+  end
+
+  require('which-key').add({
+    {'<leader>n', group = 'Navigation', mode = 'n'},
+    {
+      mode = 'n',
+      {'<leader>nw', group = 'Words'},
+      {'<leader>nww', 'w', desc = 'Next word (w)'},
+      {'<leader>nwb', 'b', desc = 'Previous word (b)'},
+      {'<leader>nwe', 'e', desc = 'End of word (e)'},
+      {'<leader>nl', group = 'Lines'},
+      {'<leader>nl0', '0', desc = 'Start of line (0)'},
+      {'<leader>nl^', '^', desc = 'First text on line (^)'},
+      {'<leader>nl$', '$', desc = 'End of line ($)'},
+      {'<leader>nlj', '5j', desc = 'Down 5 lines (5j)'},
+      {'<leader>nlk', '5k', desc = 'Up 5 lines (5k)'},
+      {'<leader>nlJ', counted_motion('Lines down: ', 'j'), desc = 'Down N lines (Nj)'},
+      {'<leader>nlK', counted_motion('Lines up: ', 'k'), desc = 'Up N lines (Nk)'},
+      {'<leader>ng', group = 'File position'},
+      {'<leader>ngg', 'gg', desc = 'Start of file (gg)'},
+      {'<leader>ngG', 'G', desc = 'End of file (G)'},
+      {'<leader>ngl', counted_motion('Go to line: ', 'G'), desc = 'Go to line (42G or :42)'},
+      {'<leader>np', group = 'Pages'},
+      {'<leader>npd', '<C-d>', desc = 'Half page down (Ctrl+d)'},
+      {'<leader>npu', '<C-u>', desc = 'Half page up (Ctrl+u)'},
+      {'<leader>npf', '<C-f>', desc = 'Full page down (Ctrl+f)'},
+      {'<leader>npb', '<C-b>', desc = 'Full page up (Ctrl+b)'},
+      {'<leader>nv', group = 'Screen position'},
+      {'<leader>nvH', 'H', desc = 'Top of screen (H)'},
+      {'<leader>nvM', 'M', desc = 'Middle of screen (M)'},
+      {'<leader>nvL', 'L', desc = 'Bottom of screen (L)'},
+      {'<leader>n}', '}', desc = 'Next paragraph (})'},
+      {'<leader>n{', '{', desc = 'Previous paragraph ({)'},
+      {'<leader>n%', '%', desc = 'Matching bracket (%)'},
+      {'<leader>nz', 'zz', desc = 'Center current line (zz)'},
+      {'<leader>n/', group = 'Search'},
+      {'<leader>n//', '/', desc = 'Search forward (/)'},
+      {'<leader>n/?', '?', desc = 'Search backward (?)'},
+      {'<leader>n/n', 'n', desc = 'Next search match (n)'},
+      {'<leader>n/N', 'N', desc = 'Previous search match (N)'},
+      {'<leader>no', '<C-o>', desc = 'Previous jump (Ctrl+o)'},
+      {'<leader>ni', '<C-i>', desc = 'Next jump (Ctrl+i)'},
+      {'<leader>ns', function() require('flash').jump() end, desc = 'Flash jump (s)'},
+      {'<leader>nS', function() require('flash').treesitter() end, desc = 'Flash syntax selection (S)'},
+    },
+  })
+end
 
 -- See :help gitsigns.nvim
 require('gitsigns').setup({})
